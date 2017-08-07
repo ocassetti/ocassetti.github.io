@@ -1,37 +1,10 @@
-## Welcome to GitHub Pages
+# About me 
 
-You can use the [editor on GitHub](https://github.com/ocassetti/blog/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+I am [Oscar Cassetti](www.linkedin.com/in/ocassetti/), I am Data Scientist / Machine Learning Engineer.
+I enjoy good software development practises and I worked on good few large scale data science projects which were deployed in various production systems. 
+I use [first principle](https://en.wikipedia.org/wiki/First_principle) analysis to approach most problems. The way I approach problems follows what I learned from studying Physics at [Department of Physiscs at Universita' di Torino](http://www.df.unito.it/do/home.pl) and
+High Performance Computing at [Trinity College, the University of Dublin](https://www.tcd.ie/).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I support [reproducible research](https://en.wikipedia.org/wiki/Reproducibility) which I believe is not just for academic research. 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ocassetti/blog/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+My research interests spans from Physics to Operation Management passing through Statistics, Maths and Computer Science. 
