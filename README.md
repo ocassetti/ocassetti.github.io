@@ -2,6 +2,7 @@
 
 I am [Oscar Cassetti](www.linkedin.com/in/ocassetti/), I am a Data Scientist / Machine Learning Engineer.
 I enjoy good software development practises and I worked on good few large scale data science projects which were deployed in various production systems. 
+
 I use [first principle](https://en.wikipedia.org/wiki/First_principle) analysis to approach most problems. The way I approach problems follows what I learned from studying Physics at [Department of Physiscs at Universita' di Torino](http://www.df.unito.it/do/home.pl) and
 High Performance Computing at [Trinity College, the University of Dublin](https://www.tcd.ie/).
 
