@@ -7,7 +7,7 @@ categories: [data-engineering, analytics]
 
 ## Why Separate Storage and Query Engine Concerns?
 
-This post is part of a series on Modern Data Warehouse Architectures and was written in Collaboration with [Oscar Cassetti](https://ocassetti.github.io/blog/).
+This post is part of a series on Modern Data Warehouse Architectures and was written in Collaboration with [Will Fleury](http://www.willfleury.com/).
 
 ### Overview
 
