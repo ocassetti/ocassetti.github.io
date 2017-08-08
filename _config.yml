@@ -1,1 +1,11 @@
+title: For Mole Problems, Call Avogadro
+description: Opinions and facts about data science and machine learning
+author: Oscar Cassetti
+
 theme: jekyll-theme-minimal
+
+future: true
+
+gems:
+  - jekyll-seo-tag
+  - jekyll-sitemap
