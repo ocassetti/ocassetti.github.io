@@ -5,7 +5,7 @@ description: Design considerations for modern data warehouses - Part I
 categories: [data-engineering, analytics]
 ---
 
-## Design Considerations I - Storage (DRAFT)
+## Design Considerations I - Storage
 
 This post is part of a [Series]({% post_url /data-engineering/2017-08-15-mdw-storage-query-engine-separation %}) on Modern Data Warehouse Architectures and was written in collaboration with with [Will Fleury](http://www.willfleury.com/).
 
