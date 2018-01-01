@@ -133,8 +133,8 @@ checkEquals(expectedConstantWalk, actualConstantWalk)
 
     ## [1] TRUE
 
-At this point we might quite happy with what we have and we might decide to move on 
-and without doing any benchmarks we might try to implement a  more complex `forwardDist`, and `reductionDist` functions.
+At this point we might be quite happy with what we have and we might decide to move on 
+and without doing any benchmarks we might try to implement more complex `forwardDist` and `reductionDist` functions.
 
 We start defining non constant function for `forwardDist`  which we call `normalForwardDist` 
 where the forward movements are sampled according to a normal distribution. Each walker is subject to  different parameters of  the distributions.
