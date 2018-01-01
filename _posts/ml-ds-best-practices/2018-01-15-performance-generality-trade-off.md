@@ -3,13 +3,13 @@ Introduction
 
 This is a short blog post of a series around the importance of writing good code for machine learning and data science projects.
 
-A few months back I answered a question on Quora around [suggestions to give to younger data scientists](https://www.quora.com/As-a-data-scientist-what-tips-would-you-have-for-a-younger-version-of-yourself/answer/Oscar-Cassetti%5D). One of the key point I made was the importance of good coding practices when doing data science and machine learning.
+A few months back I answered a question on Quora around [suggestions to give to younger data scientists](https://www.quora.com/As-a-data-scientist-what-tips-would-you-have-for-a-younger-version-of-yourself/answer/Oscar-Cassetti%5D). One of the key points I made was the importance of good coding practices when doing data science and machine learning.
 
 More often I find myself in situations where machine learning and data science projects suffer setbacks because of lack of scalability, general performance issues, lack of testing which presents to re-use the code or bring the models to production.
 
 It seems that for some unknown reasons data scientists have forgotten that software engineering actually matters. 
 
-This series aim to bring to the light some these topics.
+This series aims to bring to the light some these topics.
 
 Writing efficient code for the framework you are using
 =================================================
@@ -24,15 +24,15 @@ Here I am going to handcraft a problem similar to something I have seen in a rea
 
 ## A sample simulation engine for random walker 
 
-Imagine we need to write a simulation engine for a non-trivial random walk where we have three random walkers which can move forward according to a given probability distribution. We also have a further constraint: every step is randomly shorten according to a different distribution. 
-In short: we have 3 walker `c1, c2, c3` and at each step each random walker can move forward of a quantity `d` which is sampled according a probability distribution and his journey can be reduced by a certain factor `p` which is sampled from a different distribution. At each step each walker moves `d * p`.
+Imagine we need to write a simulation engine for a non-trivial random walk where we have three random walkers which can move forward according to a given probability distribution. We also have a further constraint: every step is randomly shortened according to a different distribution. 
+In short: we have 3 walker `c1, c2, c3` and at each step each random walker can move forward of a quantity `d` which is sampled according to a probability distribution and his journey can be reduced by a certain factor `p` which is sampled from a different distribution. At each step each walker moves `d * p`.
 
 This abstract model can be applied to various problems such as predicting the number faulty parts or the dynamic allocation of resources. 
 
 For this reason we want to be able to design the engine in such a way that we can dynamically change the two key behaviors: 
 
-1. how much each walkers move forward 
-2. how much the journey of each walker is reduced.
+1. How much each walker moves forward. 
+2. How much the journey of each walker is reduced.
 
 I am going to show you an example written in R to highlight the issue I mentioned at the beginning:
 *the lack of understanding of the framework can lead to bad performances or code that is hard to maintain*.
@@ -136,7 +136,7 @@ checkEquals(expectedConstantWalk, actualConstantWalk)
 At this point we might be quite happy with what we have and we might decide to move on 
 and without doing any benchmarks we might try to implement more complex `forwardDist` and `reductionDist` functions.
 
-We start defining non constant function for `forwardDist`  which we call `normalForwardDist` 
+We start defining non-constant functions for `forwardDist`  which we call `normalForwardDist` 
 where the forward movements are sampled according to a normal distribution. Each walker is subject to  different parameters of  the distributions.
 
 
@@ -179,7 +179,7 @@ Our implementation seems sound: we can customize the logic inside our input func
 However, when we start plugging large number of $$n \approx 10^5 $$ we notice that the simulation is  quite slow: around 2 seconds to generate the walk for just 3 walkers.
 
 We did not run neither profiling nor benchmarks, in a real scenario we could have 
-deployed the engine into production and we just realised it is does not scale  at all.
+deployed the engine into production and we just realised it does not scale  at all.
 
 We can check how long it takes to compute a walk with $10^5$ steps pretty easily:
 
@@ -191,7 +191,7 @@ system.time(runSim(1e5, normalForwardDist, constantReductionDist))
     ##   2.381   0.007   2.396
 
 
-## Version 2 - a less dirtier approach
+## Version 2 - a less dirty approach
 
 We need to improve the performance but we do not want to loose flexibility. After all, 
 our initial engine is pretty flexible: we can plug any distribution function to it, and we do not need  need to touch it. 
@@ -285,7 +285,7 @@ Further steps of the walk will be different as the in the first approach we gene
 
 Now the question is how faster is this approach compared the previous one:  what improvement did we make? We can run a simple benchmark test with various size of the simulation compute how long
 it takes to execute the full walk. 
-To run the benchmark I am using `Rbenchmark` and I set 50 repetition for each walk to
+To run the benchmark I am using `Rbenchmark` and I set 50 repetitions for each walk to
 average the execution times. The average execution time for the two version is displayed below.
 
 {% include image.html img="/assets/images/ml-ds-best-practices/unnamed-chunk-15-1.png" caption="Execution comparisons" %}
@@ -297,7 +297,7 @@ We made a substantial improvement and for large *n* version 2 is 10x faster.
 
 We could stop here but out of curiosity we want to understand if we can make further improvements by writing a specific simulation engine for the normal distribution problem. 
 
-We want to answer the following question:  *how much performance do we need to trade off in exchange of flexibility ?*
+We want to answer the following question:  *how much performance do we need to trade off in exchange for flexibility ?*
 
 An inflexible but quite efficient way to write `runSim` for the *normal* distribution 
 is to hard-code the function inside `runSim`:
@@ -318,7 +318,7 @@ This implementation of `runSim` is missing all the flexibility of our previous v
 We need to implement a version of runSim for each distribution and it only supports 3 
 walkers. But we do not really care as the goal is to understand what is the trade-off we are paying.
 
-As we did before we test that we are getting the same results, we need to make sure we are comparing apples with apples! 
+As we did before we test that we are getting the same results, we need to make sure we are comparing apples to apples! 
 This approach should return the same result as our second version even for *n* &gt; 1.
 
 
@@ -456,8 +456,8 @@ checkEquals(normalFowrardWalk42e2, actualNormalWalk)
 We are happy that the refactor did not impact the result of the simulation but the big
 question is are we getting better comparable performance to version 3?
 
-Below the picture of a benchmark that show the various versions and zoom view of 
-version 3 vs version 4
+Below the picture of a benchmark that shows the various versions and zooms into the  
+version 3 vs version 4.
 
 {% include image.html img="/assets/images/ml-ds-best-practices/unnamed-chunk-27-1.png" caption="Execution comparisons" %}
 {% include image.html img="/assets/images/ml-ds-best-practices/unnamed-chunk-27-2.png" caption="Execution comparisons" %}
