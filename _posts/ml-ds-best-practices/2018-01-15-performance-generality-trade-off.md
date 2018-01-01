@@ -20,14 +20,14 @@ Related to this I also noticed is that the lack of understanding of the framewor
 
 Essentially it seems quite hard to find a good balance between writing code that is easy to maintain as well as it performs well. 
 
-Here I am going to handcraft a problem similar to something I have seen in a real production environment, to debunk this isse.
+Here I am going to handcraft a problem similar to something I have seen in a real production environment, to debunk this issue.
 
 ## A sample simulation engine for random walker 
 
-Imagine we need to write a simulation engine for a non trivial random walk where we have three random walkers which can move forward according to a given probability distribution. We also have a further constraint: every step is randomly shorten according to a different distribution. 
+Imagine we need to write a simulation engine for a non-trivial random walk where we have three random walkers which can move forward according to a given probability distribution. We also have a further constraint: every step is randomly shorten according to a different distribution. 
 In short: we have 3 walker `c1, c2, c3` and at each step each random walker can move forward of a quantity `d` which is sampled according a probability distribution and his journey can be reduced by a certain factor `p` which is sampled from a different distribution. At each step each walker moves `d * p`.
 
-This abstract model can be applied to various problems such as predicting the number faulty parts or the usage of resources. 
+This abstract model can be applied to various problems such as predicting the number faulty parts or the dynamic allocation of resources. 
 
 For this reason we want to be able to design the engine in such a way that we can dynamically change the two key behaviors: 
 
@@ -299,8 +299,8 @@ We could stop here but out of curiosity we want to understand if we can make fur
 
 We want to answer the following question:  *how much performance do we need to trade off in exchange of flexibility ?*
 
-An non flexible but quite efficient way to write `runSim` for the *normal* distribution 
-is to hard code the function inside `runSim`:
+An inflexible but quite efficient way to write `runSim` for the *normal* distribution 
+is to hard-code the function inside `runSim`:
 
 ``` r
 runSim <- function(n) {
