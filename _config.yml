@@ -6,5 +6,5 @@ theme: jekyll-theme-minimal
 
 future: true
 
-gems:
+plugins:
   - jekyll-sitemap
