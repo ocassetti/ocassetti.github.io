@@ -12,7 +12,7 @@ It seems that for some unknown reasons data scientists have forgotten that softw
 Writing efficient code for the framework you are using
 =================================================
 
-In the past year I kept track of how often I had to fix both my code or someone else code due to performance issues. One thing that came clear is that the first source of poor performance is the lack of understanding of the actual framework or programming language one is using as well as not doing enough bench marking. The second reason is that when addressing performance issues the code becomes less extensible and even less maintainable. Essentially it seems quite hard to find a good balance between writing code that is easy to maintain as well performant. But this does not have to be the case. Here I am going to handcraft a problem similar to something I have seen in real production environment.
+In the past year I kept track of how often I had to fix both my code or someone else code due to performance issues. One thing that came clear is that the first source of poor performance is the lack of understanding of the actual framework or programming language one is using as well as not doing enough bench marking. The second reason is that when addressing performance issues the code becomes less extensible and even less maintainable. Essentially it seems quite hard to find a good balance between writing code that is easy to maintain as well as performant. But this does not have to be the case. Here I am going to handcraft a problem similar to something I have seen in real production environment.
 
 Imagine we need to write a simulation engine for a non trivial random walk where we have three random walkers which can move forward according to a given probability distribution. We have a further constraint that is their journey could be randomly shorten according to a different distribution, that is after a random walker decides to move forward according to this distribution his journey can be reduced by a certain factor which is sample from a different distribution. This abstract model can be applied to various problems such as predicting the number faulty parts or the usage of resources. For this reason we want to be able to design the engine in such a way that we can dynamically change the two key behaviors that is how walkers move forward and how much their journey is reduced at each step.
 
@@ -336,17 +336,19 @@ We can also start to think about re-writing `runSim` to work with and arbitrary 
 ``` r
 runSim <- function(n, forwardDist, reductionDist, walkers=c("c1", "c2", "c3")) {
   
-  simValMatix <- matrix(NA, ncol = length(walkers), nrow = n)
+  simValMatix <- vapply(walkers, function(walker) {
+      walkerForwardDist <- forwardDist()[[walker]]
+      walkerReductionDist <- reductionDist()[[walker]]
+      walkerForwardDist(n) * walkerReductionDist(n)
+  }, rep(0.0, n))
   
-  for(i in seq_along(walkers)){
-    walker <- walkers[i]
-    walkerForwardDist <- forwardDist()[[walker]]
-    walkerReductionDist <- reductionDist()[[walker]]
-    simValMatix[, i] <- walkerForwardDist(n) * walkerReductionDist(n)
-  }
+  dimnames(simValMatix) <- NULL
   simValMatix
 }
 ```
+
+Note that we have refactored the `runSim` to use `vapply` and *anonymous* function. We set the dimension of the `simValMatrix` to `NULL` to make sure that the result matches exactly the previous one. This last step is necessary if we want to keep the return value of `runSim` consistent.
+
 
 As per usual we run our test to make sure we are still doing a good job, first against the constant functions
 
@@ -367,7 +369,6 @@ checkEquals(normalFowrardWalk42e2, actualNormalWalk)
 
     ## [1] TRUE
 
-We are happy that the refactoring is not impacting the result of the simulation but are we getting better speed
 
 We are happy that the refactoring is not impacting the result of the simulation but are we getting better speed
 
