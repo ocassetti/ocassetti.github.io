@@ -151,12 +151,12 @@ normalForwardDist <- function(){
 ```
 
 
-The figure below show the 3 normal distributions used in `normalFowardDist`.
+The figure below shows the 3 normal distributions used in `normalFowardDist`.
 
 
 {% include image.html img="/assets/images/ml-ds-best-practices/unnamed-chunk-4-1.png" caption="Histogram normal distribution" %}
 
-We can call  `normalFowardDist` very easily to check that everything work as expected:
+We can call  `normalFowardDist` very easily to check that everything works as expected:
 
 ```r
 
@@ -175,11 +175,11 @@ runSim(10, normalForwardDist, constantReductionDist)
     ##  [9,] 8.948482 21.45228 2.490752
     ## [10,] 8.927771 21.44081 2.540795
 
-All looks good. Our implementation seems sounds: we can customize the logic inside our input functions and we do not need to touch the engine. We have a generic engine.
+Our implementation seems sound: we can customize the logic inside our input functions and we do not need to touch the engine. We have a generic engine.
 However, when we start plugging large number of $$n \approx 10^5 $$ we notice that the simulation is  quite slow: around 2 seconds to generate the walk for just 3 walkers.
 
-We didn't do any profiling or run any benchmarks, in a real scenario we could have 
-deployed the engine into production and we just realised it is does not scale well at all.
+We did not run neither profiling nor benchmarks, in a real scenario we could have 
+deployed the engine into production and we just realised it is does not scale  at all.
 
 We can check how long it takes to compute a walk with $10^5$ steps pretty easily:
 
@@ -193,9 +193,8 @@ system.time(runSim(1e5, normalForwardDist, constantReductionDist))
 
 ## Version 2 - a less dirtier approach
 
-We need to improve performance but we really do not want to loose flexibility. After all 
-our engine is pretty powerful we can plug any distribution function to it which the need
-to touch it. 
+We need to improve the performance but we do not want to loose flexibility. After all, 
+our initial engine is pretty flexible: we can plug any distribution function to it, and we do not need  need to touch it. 
 
 Before we start *refactoring* for performance it is a good idea to have some test 
 that will assure us that the new version behaves like the previous one, when possible,
