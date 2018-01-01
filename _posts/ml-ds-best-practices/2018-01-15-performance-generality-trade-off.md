@@ -87,7 +87,7 @@ constantReductionDist <- function(){
 
 As you can see the functions return a constant for each walker.
 
-These function have also a strategic use: they will allow us to run a sanity checks in the forms of unit test  around various implementations or versions `runSim`. 
+These function have also a strategic use: they will allow us to run sanity checks in the forms of unit tests  around various implementations or versions `runSim`. 
 I am using `RUnit` as framework for unit testing.
 
 ``` r
