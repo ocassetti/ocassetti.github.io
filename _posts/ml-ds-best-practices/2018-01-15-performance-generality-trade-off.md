@@ -418,9 +418,8 @@ runSim <- function(n, forwardDist, reductionDist, walkers=c("c1", "c2", "c3")) {
       walkerForwardDist <- forwardDist()[[walker]]
       walkerReductionDist <- reductionDist()[[walker]]
       walkerForwardDist(n) * walkerReductionDist(n)
-  }, rep(0.0, n))
+  }, rep(0.0, n), USE.NAMES = FALSE)
   
-  dimnames(simValMatix) <- NULL
   simValMatix
 }
 ```
@@ -429,7 +428,8 @@ Note that I used `vapply` and *anonymous* functions. I also tested a similar ver
 loops and pre-allocation of the memory which had similar performance. I settle down 
 for the `vapply` variant as O found it easier to read.
 
-Also in `runDist` we set the dimension of the `simValMatrix` to `NULL` to make sure that the result matches exactly the previous one. 
+Also in `vapply` we set `USE.NAMES = FALSE`  to make sure that the result matches exactly the previous one. 
+
 This last step is necessary if we want to keep the return value of `runSim` consistent with 
 the previous versions, which often required when you start to refactor a large project.
 
